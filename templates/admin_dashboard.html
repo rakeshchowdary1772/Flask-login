@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Hi {{ current_user.username  }} , Welcome To Admin Dashboard.</h1>
+    <li><a href="{{ url_for('logout_view') }}">Logout</a></li>
+    <li><a href="{{ url_for('update_password') }}">update password</a></li>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for  message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+</body>
+</html>

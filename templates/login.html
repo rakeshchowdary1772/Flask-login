@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <form method="POST" action="/login"> 
+            {% if 'username' in session %}
+            <li>Welcome, {{ session.get('username')}}!</li>
+            <li><a href="{{ url_for('logout_view') }}">Logout</a></li>
+            <li><a href="{{ url_for('update_password') }}">update password</a></li>
+
+            {% else %}
+            <div class="input-values">
+                <label for="username">username:<input type="text" id="username" name="username"    /></label>
+                <label for="password">password:<input type="password" id="password"  name="password"  /></label>
+                <input type="submit" value="login"/>
+                <div class="reg-forgot">
+                    <a href="{{ url_for('register') }}">register</a>
+                    <a href="{{ url_for('forgot_password') }}">forgot password</a>
+                </div>
+                        {% with messages = get_flashed_messages(with_categories=false) %}
+                            {% if messages %}
+                                {% for  message in messages %}
+                                <p>{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+            {%  endif %}
+                    
+            </div>
+            
+    </div>
+
+    
+</body>
+</html>
